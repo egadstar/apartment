@@ -3,8 +3,8 @@ require 'apartment/adapters/postgresql_adapter'
 
 describe Apartment::Adapters::PostgresqlAdapter, ruby: true do
 
-  let(:config){ Apartment::Test.config['connections']['postgresql'] }
-  subject{ Apartment::Database.postgresql_adapter config.symbolize_keys }
+  let(:config){ Apartment::Test.config['connections']['postgresql'].symbolize_keys }
+  subject{ Apartment::Database.postgresql_adapter config }
 
   context "using schemas" do
 
@@ -21,7 +21,7 @@ describe Apartment::Adapters::PostgresqlAdapter, ruby: true do
     it_should_behave_like "a schema based apartment adapter"
   end
 
-  context "using databases" do
+  context "using connections" do
 
     before{ Apartment.use_schemas = false }
 
@@ -33,6 +33,6 @@ describe Apartment::Adapters::PostgresqlAdapter, ruby: true do
     let(:default_database){ subject.process{ ActiveRecord::Base.connection.current_database } }
 
     it_should_behave_like "a generic apartment adapter"
-    it_should_behave_like "a db based apartment adapter"
+    it_should_behave_like "a connection based apartment adapter"
   end
 end
