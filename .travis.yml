@@ -4,4 +4,4 @@ rvm:
   - 1.9.3
   - jruby-19mode
 before_script:
-  - sudo apt-get install -qq freetds-dev
+  - sudo apt-get install freetds-dev freetds-bin tdsodbc -qq
