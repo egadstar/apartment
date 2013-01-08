@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Apartment::Database do
   context "using mysql" do
+    pending
     # See apartment.yml file in dummy app config
 
     let(:config){ Apartment::Test.config['connections']['mysql'].symbolize_keys }
@@ -17,9 +18,14 @@ describe Apartment::Database do
         subject.reload!
       end
 
-      it "should load mysql adapter" do
+      it "should load mysql adapter", ruby: true do
         subject.adapter
         Apartment::Adapters::Mysql2Adapter.should be_a(Class)
+      end
+
+      it "should load jdbc mysql adapter", jruby: true do
+        subject.adapter
+        Apartment::Adapters::JDBCMysqlAdapter.should be_a(Class)
       end
     end
 
@@ -47,7 +53,7 @@ describe Apartment::Database do
   end
 
   context "using postgresql" do
-
+    pending
     # See apartment.yml file in dummy app config
 
     let(:config){ Apartment::Test.config['connections']['postgresql'].symbolize_keys }
@@ -66,9 +72,14 @@ describe Apartment::Database do
         subject.reload!
       end
 
-      it "should load postgresql adapter" do
+      it "should load postgresql adapter", ruby: true do
         subject.adapter
         Apartment::Adapters::PostgresqlAdapter.should be_a(Class)
+      end
+
+      it "should load jdbc postgresql adapter" do
+        subject.adapter
+        Apartment::Adapters::JDBCPostgresqlAdapter.should be_a(Class)
       end
 
       it "should raise exception with invalid adapter specified" do
@@ -162,7 +173,7 @@ describe Apartment::Database do
 
   end
 
-  context "using sqlserver" do
+  context "using sqlserver", sqlserver: true do
     # See apartment.yml file in dummy app config
 
     let(:config){ Apartment::Test.config['connections']['sqlserver'].symbolize_keys }
@@ -181,7 +192,12 @@ describe Apartment::Database do
         subject.reload!
       end
 
-      it "should load sqlserver adapter" do
+      it "should load sqlserver adapter", ruby: true do
+        subject.adapter
+        Apartment::Adapters::SqlserverAdapter.should be_a(Class)
+      end
+
+      it "should load jdbc sqlserver adapter", jruby: true do
         subject.adapter
         Apartment::Adapters::SqlserverAdapter.should be_a(Class)
       end

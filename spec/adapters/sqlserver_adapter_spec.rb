@@ -1,8 +1,7 @@
 require 'spec_helper'
 require 'apartment/adapters/sqlserver_adapter'
 
-describe Apartment::Adapters::SqlserverAdapter do
-  unless defined?(JRUBY_VERSION)
+describe Apartment::Adapters::SqlserverAdapter, sqlserver: true, ruby: true do
 
     let(:config) { Apartment::Test.config['connections']['sqlserver'] }
     subject { Apartment::Database.sqlserver_adapter config.symbolize_keys }
@@ -16,5 +15,4 @@ describe Apartment::Adapters::SqlserverAdapter do
     it_should_behave_like "a generic apartment adapter"
     it_should_behave_like "a db based apartment adapter"
 
-  end
 end
