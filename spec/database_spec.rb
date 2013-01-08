@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Apartment::Database do
   context "using mysql" do
-    pending
     # See apartment.yml file in dummy app config
 
     let(:config){ Apartment::Test.config['connections']['mysql'].symbolize_keys }
@@ -53,7 +52,6 @@ describe Apartment::Database do
   end
 
   context "using postgresql" do
-    pending
     # See apartment.yml file in dummy app config
 
     let(:config){ Apartment::Test.config['connections']['postgresql'].symbolize_keys }
