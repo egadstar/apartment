@@ -36,9 +36,9 @@ RSpec.configure do |config|
   end
 
   unless defined?(JRUBY_VERSION)
-    platform = 'ruby'.to_sym
-  else
     platform = 'jruby'.to_sym
+  else
+    platform = 'ruby'.to_sym
   end
 
   config.filter_run_excluding sqlserver: true, platform => true
