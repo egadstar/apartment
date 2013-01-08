@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'lib/apartment/adapters/jdbc_mysql_adapter'
+require 'apartment/adapters/jdbc_mysql_adapter'
 
 describe Apartment::Adapters::JDBCMysqlAdapter, jruby: true do
 
@@ -13,7 +13,7 @@ describe Apartment::Adapters::JDBCMysqlAdapter, jruby: true do
   let(:default_database) { subject.process { ActiveRecord::Base.connection.current_database } }
 
   it_should_behave_like "a generic apartment adapter"
-  it_should_behave_like "a db based apartment adapter"
+  it_should_behave_like "a connection based apartment adapter"
 
 end
 

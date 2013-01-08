@@ -37,7 +37,6 @@ module Apartment
         end
 
         begin
-          require "apartment/adapters/abstract_jdbc_adapter" if config[:adapter].eql?('jdbc')
           require "apartment/adapters/#{adapter_method}"
         rescue LoadError
           raise "The adapter `#{adapter_method}` is not yet supported"

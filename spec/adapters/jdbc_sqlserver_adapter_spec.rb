@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'lib/apartment/adapters/jdbc_sqlserver_adapter'
+require 'apartment/adapters/jdbc_sqlserver_adapter'
 
 describe Apartment::Adapters::JDBCSqlserverAdapter, sqlserver: true, jruby: true do
 
@@ -13,6 +13,6 @@ describe Apartment::Adapters::JDBCSqlserverAdapter, sqlserver: true, jruby: true
   let(:default_database) { subject.process { ActiveRecord::Base.connection.database_name } }
 
   it_should_behave_like "a generic apartment adapter"
-  it_should_behave_like "a db based apartment adapter"
+  it_should_behave_like "a connection based apartment adapter"
 
 end
