@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'apartment/adapters/postgresql_adapter'
 
-describe Apartment::Adapters::PostgresqlAdapter, postgresql: true do
+describe Apartment::Adapters::PostgresqlAdapter, postgresql: true, ruby: true do
 
   let(:config){ Apartment::Test.config['connections']['postgresql'].symbolize_keys }
   subject{ Apartment::Database.postgresql_adapter config }

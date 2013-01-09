@@ -1,3 +1,14 @@
+<% if defined?(JRUBY_VERSION) %>
+connections:
+  sqlserver:
+    adapter: jdbc
+    username: sa
+    password:
+    driver: net.sourceforge.jtds.jdbc.Driver
+    url: jdbc:jtds:sqlserver//localhost:1433/apartment_sqlserver_test
+    timeout: 5000
+    pool: 5
+<% else %>
 connections:
   postgresql:
     adapter: postgresql
@@ -20,3 +31,4 @@ connections:
     database: apartment_sqlserver_test
     username: sa
     password:
+<% end %>

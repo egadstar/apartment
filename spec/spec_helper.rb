@@ -35,7 +35,13 @@ RSpec.configure do |config|
     Apartment.reset
   end
 
-  config.filter_run_excluding sqlserver: true
+  unless defined?(JRUBY_VERSION)
+    platform = 'jruby'.to_sym
+  else
+    platform = 'ruby'.to_sym
+  end
+
+  config.filter_run_excluding sqlserver: true, platform => true
 
 end
 

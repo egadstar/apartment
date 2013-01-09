@@ -66,6 +66,7 @@ module Apartment
 
   module Adapters
     autoload :AbstractAdapter, 'apartment/adapters/abstract_adapter'
+    autoload :AbstractJDBCAdapter, 'apartment/adapters/abstract_jdbc_adapter'
     # Specific adapters will be loaded dynamically based on adapter in config
   end
 

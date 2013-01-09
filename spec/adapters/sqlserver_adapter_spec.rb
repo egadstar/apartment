@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'apartment/adapters/sqlserver_adapter'
 
-describe Apartment::Adapters::SqlserverAdapter, sqlserver: true do
+describe Apartment::Adapters::SqlserverAdapter, sqlserver: true, ruby: true do
 
     let(:config) { Apartment::Test.config['connections']['sqlserver'] }
     subject { Apartment::Database.sqlserver_adapter config.symbolize_keys }
