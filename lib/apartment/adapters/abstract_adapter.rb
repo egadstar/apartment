@@ -38,7 +38,12 @@ module Apartment
       def current_database
         @current_database = Apartment.connection.current_database
       end
-      alias_method :current, :current_database
+
+      #   Note alias_method here doesn't work with inheritence apparently ??
+      #
+      def current
+        current_database
+      end
 
       #   Drop the database
       #
@@ -48,7 +53,7 @@ module Apartment
         # Apartment.connection.drop_database   note that drop_database will not throw an exception, so manually execute
         Apartment.connection.execute("DROP DATABASE #{environmentify(database)}" )
 
-      rescue ActiveRecord::StatementInvalid
+      rescue Exception
         raise DatabaseNotFound, "The database #{environmentify(database)} cannot be found"
       end
 
@@ -114,7 +119,7 @@ module Apartment
       def create_database(database)
         Apartment.connection.create_database( environmentify(database) )
 
-      rescue ActiveRecord::StatementInvalid
+      rescue Exception
         raise DatabaseExists, "The database #{environmentify(database)} already exists."
       end
 
@@ -126,7 +131,7 @@ module Apartment
         Apartment.establish_connection multi_tenantify(database)
         Apartment.connection.active?   # call active? to manually check if this connection is valid
 
-      rescue ActiveRecord::StatementInvalid
+      rescue Exception
         raise DatabaseNotFound, "The database #{environmentify(database)} cannot be found."
       end
 

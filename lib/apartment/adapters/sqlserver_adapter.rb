@@ -22,8 +22,8 @@ module Apartment
       #
       def connect_to_new(database)
         super
-      rescue DatabaseNotFound, TinyTds::Error
-        self.reset
+      rescue TinyTds::Error
+        Apartment::Database.reset
         raise DatabaseNotFound, "Cannot find database #{environmentify(database)}"
       end
     end

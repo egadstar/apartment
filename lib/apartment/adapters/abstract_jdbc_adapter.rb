@@ -15,7 +15,10 @@ module Apartment
           @current_database = super
         end
       end
-      alias_method :current, :current_database
+
+      def current
+        current_database
+      end
 
       #   Drop the database
       #
@@ -24,7 +27,7 @@ module Apartment
       def drop(database)
         super(database)
 
-      rescue DatabaseNotFound, ActiveRecord::JDBCError
+      rescue ActiveRecord::JDBCError
         raise DatabaseNotFound, "The database #{environmentify(database)} cannot be found"
       end
 
@@ -37,7 +40,7 @@ module Apartment
       def create_database(database)
         super(database)
 
-      rescue DatabaseExists, ActiveRecord::JDBCError
+      rescue ActiveRecord::JDBCError
         raise DatabaseExists, "The database #{environmentify(database)} already exists."
       end
 
@@ -48,7 +51,7 @@ module Apartment
       def connect_to_new(database)
         super(database)
 
-      rescue DatabaseNotFound, ActiveRecord::JDBCError
+      rescue ActiveRecord::JDBCError
         raise DatabaseNotFound, "The database #{environmentify(database)} cannot be found."
       end
 

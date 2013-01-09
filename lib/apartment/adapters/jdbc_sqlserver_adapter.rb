@@ -20,8 +20,8 @@ module Apartment
       #
       def connect_to_new(database)
         super(database)
-      rescue DatabaseNotFound
-        self.reset
+      rescue ActiveRecord::JDBCError
+        Apartment::Database.reset
         raise DatabaseNotFound, "Cannot find database #{environmentify(database)}"
       end
     end
