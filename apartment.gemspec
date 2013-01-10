@@ -31,11 +31,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'delayed_job_active_record'
 
   if defined?(JRUBY_VERSION)
-    s.add_development_dependency 'activerecord-jdbc-adapter'
-    s.add_development_dependency 'jdbc-postgres'
-    s.add_development_dependency 'jdbc-mysql'
-    s.add_development_dependency 'jdbc-sqlite3'
-    s.add_development_dependency 'jdbc-jtds'
+    s.add_development_dependency 'activerecord-jdbcpostgresql-adapter'
+    s.add_development_dependency 'activerecord-jdbcmysql-adapter'
+    s.add_development_dependency 'activerecord-jdbcsqlite3-adapter'
+    s.add_development_dependency 'activerecord-jdbcmssql-adapter'
     s.add_development_dependency 'jruby-openssl'
   else
     s.add_development_dependency 'mysql2', '~> 0.3.10'

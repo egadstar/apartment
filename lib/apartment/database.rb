@@ -26,12 +26,12 @@ module Apartment
     def adapter
       Thread.current[:apartment_adapter] ||= begin
         if defined?(JRUBY_VERSION)
-          # sql server?
-          if config[:adapter].eql?('jdbc') && config[:driver] =~ /jtds/
-            adapter_method = "sqlserver_jdbc_adapter"
-          else
-            # create a generic adapter method that will not be defined - trigger the exception
-            adapter_method = "undefined_jdbc_adapter"
+          if config[:driver] =~ /mysql/
+            adapter_method = 'mysql_jdbc_adapter'
+          elsif config[:driver] =~ /postgresql/
+            adapter_method = 'postgresql_jdbc_adapter'
+          elsif config[:driver] =~ /jtds/
+            adapter_method = 'sqlserver_jdbc_adapter'
           end
         else
           adapter_method = "#{config[:adapter]}_adapter"
